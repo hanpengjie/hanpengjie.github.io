@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>北京普艾斯科技 - 二手车</title>
+	<meta content="二手车" name="keywords" />
+	<meta content="二手车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script language="JavaScript">
+		$(function() {
+			$('.nextpage').click(function(){
+				var nextpage = parseInt($("input[name=nextpage]").val());
+				var page = parseInt($("input[name=page]").val());
+				$.get("/index.php?m=ajax&ajax=1&shopcarlist=1&uid=184&page="+nextpage,
+					function (data, textStatus){
+						if(data!=''){
+							$("#listcar").append(data);
+							$("input[name=page]").val(1);
+						}
+						else{
+							$("#pagestatus").show().html("加载完毕，已没有更多车源");
+							$(".nextpage").hide();
+						}
+					}
+				);
+				$("input[name=nextpage]").val(nextpage+1);
+			});
+		})
+	</script>
+	</head>
+	<body>
+<header class="mo-header">
+      <div class="mo-header-left"> <a href="#"> 首页 </a> <i class="iconfont">&#xe61d;</i> <span> 商家店铺 </span> </div>
+    </header>
+<div class="shop-info-list">
+      <ul>
+    <li>店铺名称：北京普艾斯科技</li>
+    <li>咨询电话：010-90898987</li>
+    <li>在售车辆：103</li>
+  </ul>
+    </div>
+<div class="index-box" id="listcar">
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>东南 V3菱悦2009款 V3菱悦 风采版</h4>
+        <p class="caritem">2010-04 上牌 / 5.35万公里</p>
+        <p class="carprice">￥3.30万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>马自达3星骋 2012款 马自达3 星骋 两厢 2.0L 自动 豪华运动型</h4>
+        <p class="caritem">2012-01 上牌 / 6.36万公里</p>
+        <p class="carprice">￥8.00万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>别克 君威2010款 君威 2.0 世博版</h4>
+        <p class="caritem">2011-04 上牌 / 7.00万公里</p>
+        <p class="carprice">￥10.50万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>大众 速腾2011款 速腾 1.6L 手动 舒适型</h4>
+        <p class="caritem">2011-10 上牌 / 6.10万公里</p>
+        <p class="carprice">￥7.50万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>奥迪A12013款 奥迪A1 30TFSI Ego 中国限量版</h4>
+        <p class="caritem">2014-06 上牌 / 2.40万公里</p>
+        <p class="carprice">￥16.90万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>马自达 睿翼2009款 睿翼 2.5L 至尊版</h4>
+        <p class="caritem">2009-11 上牌 / 6.27万公里</p>
+        <p class="carprice">￥10.30万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>陆风X72015款 陆风X7 2.0T 全景旗舰版</h4>
+        <p class="caritem">2015-09 上牌 / 1.61万公里</p>
+        <p class="carprice">￥13.00万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>宝马X32009款 宝马X3 xDrive30i</h4>
+        <p class="caritem">2009-04 上牌 / 11.50万公里</p>
+        <p class="carprice">￥19.00万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>吉利全球鹰 远景2006款 远景 1.8CVVT-MT舒适型</h4>
+        <p class="caritem">2008-10 上牌 / 7.00万公里</p>
+        <p class="carprice">￥2.10万</p>
+      </div>
+        </a> </div>
+      <div class="listcar"> <a href="#" target="_blank">
+        <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+        <div class="carinfo">
+        <h4>大众 迈腾2007款 迈腾 1.8TSI 手自一体舒适型</h4>
+        <p class="caritem">2008-08 上牌 / 7.50万公里</p>
+        <p class="carprice">￥10.80万</p>
+      </div>
+        </a> </div>
+    </div>
+<div id="pagestatus" style="display:none;"></div>
+<a href="javascript:;" class="nextpage">查看更多车源</a>
+<input type="hidden" name="nextpage" value="2">
+<input type="hidden" name="page" value="1">
+<a href="javascript:;" id="returntop"></a> 
+<script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script>
+</body>
+</html>

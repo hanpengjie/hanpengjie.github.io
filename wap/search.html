@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>搜索 - 光大好车</title>
+<meta content="光大好车" name="keywords" />
+<meta content="光大好车" name="description" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script type="text/javascript" src="script/jquery.js"></script>
+<script type="text/javascript" src="script/bootstrap.min.js"></script>
+</script>
+</head>
+<body>
+<div id="brand-box">
+  <header class="mo-header">
+    <div class="mo-header-title-search">
+      <form method="post" action="">
+        <input type="text" name="k" placeholder="请输入品牌、车系搜索" class="form-control keywords">
+      </form>
+    </div>
+    <div class="mo-header-right"> <a href="#" class="reback"> 取消 </a> </div>
+  </header>
+</div>
+<a href="javascript:;" id="returntop"></a> 
+<script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script>
+</body>
+</html>

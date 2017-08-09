@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>我的预约 - 光大好车</title>
+	<meta content="光大好车" name="keywords" />
+	<meta content="光大好车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/layer.js"></script>
+	<script language="JavaScript">
+		$(function() {
+			$('.carnum').delay(2000).hide(0);
+			$('.nextpage').click(function(){
+				var nextpage = parseInt($("input[name=nextpage]").val());
+				var page = parseInt($("input[name=page]").val());
+				$.get(""+nextpage,
+					function (data, textStatus){
+						if(data!=''){
+							$("#listcar").append(data);
+							$("input[name=page]").val(1);
+						}
+						else{
+							$("#pagestatus").show().html("加载完毕，已没有更多预约信息");
+							$(".nextpage").hide();
+						}
+					}
+				);
+				$("input[name=nextpage]").val(nextpage+1);
+			});
+		})
+	</script>
+	</head>
+	<body>
+<div class="black_overlay"></div>
+<!--内容-->
+<header class="mo-header">
+      <div class="mo-header-left"> <a href="#"> 首页 </a> <i class="iconfont">&#xe61d;</i> <a href="#"> 会员中心 </a> <i class="iconfont">&#xe61d;</i> <a href="#"> 我的预约 </a> </div>
+    </header>
+<div>
+      <div class="listcar">
+    <div class="carimg"> <a href="#" target="_blank"><img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/></a> </div>
+    <div class="carinfo">
+          <h4><a href="#" target="_blank">奥迪A4L 2013款 奥迪A4L 30 TFSI 自动 舒适型</a> </h4>
+          <p class="caritem"> 上牌 / 20.00万公里</p>
+          <p class="carprice">29.10万元</p>
+        </div>
+  </div>
+    </div>
+<div id="pagestatus" style="display:none;"></div>
+<a href="javascript:;" id="returntop"></a> 
+<script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script>
+</body>
+</html>

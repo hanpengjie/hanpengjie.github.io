@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>- 奥迪A6 2004款 奥迪A6 1.8（125马力） - 锐车官网，二手车源码，二手车app,二手车手机wap版,二手车代码，二手车程序，二手车建站，汽车网站源码，汽车网站系统，汽车门户网站系统，php+mysql-锐车官方网站</title>
+	<meta content="二手车" name="keywords" />
+	<meta content="二手车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/layer.js"></script>
+	<script type="text/javascript" src="script/TouchSlide.1.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//预约
+			$(".orderbut").click(function(){
+				var mythis = $(this);
+				var textname = $(this).text();
+				$.get("/index.php?m=ajax&ajax=1&order=1",{
+					pid : 124,
+					uid : 0
+				}, function (data,textStatus){
+					if(data==1){
+						if(textname=="预约看车"){
+							mythis.text("预约成功");
+						}
+						else{
+							layer.open({
+								btn: ['确定'],
+								content:'您已经预约过了！'
+							});
+						}
+					}
+					else if(data==2){
+						layer.open({
+							btn: ['确定'],
+							content:'清登录后再预约！'
+						});
+					}
+					else{
+						layer.open({
+							btn: ['确定'],
+							content:'预约失败!'
+						});
+					}
+				});
+			});
+			//添加收藏
+			$(".collectbut").click(function(){
+				var mythis = $(this);
+				var textname = $(this).text();
+				$.get("/index.php?m=ajax&ajax=1&collect=1",{
+					pid : 124
+				}, function (data,textStatus){
+					if(data==1){
+						if(textname=="收藏"){
+							mythis.text("取消收藏");
+						}
+						else{
+							mythis.text("收藏");
+						}
+					}
+					else if(data==2){
+						layer.open({
+							btn: ['确定'],
+							content:'清登录后再收藏!'
+						});
+					}
+					else{
+						layer.open({
+							btn: ['确定'],
+							content:'收藏失败!'
+						});
+					}
+				});
+			});
+			
+			//计算贷款
+			$(".clickloan").click(function(){
+				layer.open({
+					type: 1,
+					skin: 'layui-layer-rim', //加上边框
+					area: ['620px', '340px'], //宽高
+					content: $('#loan')
+				});
+			});
+			$("#loanbut").click(function() {
+				var down_payment=$("#down_payment").val();
+				var amount=$("input[name='amount']").val();
+				var financing_maturity=$("#financing_maturity").val();
+				if(down_payment  && amount && financing_maturity)
+				{
+					if(financing_maturity==12){ var maturity=0.0388}
+					if(financing_maturity==24){ var maturity=0.0777}
+					if(financing_maturity==36){ var maturity=0.01147689}
+					var money= (((amount*(1-down_payment))*(1+maturity)) / financing_maturity);
+					var finalmoney=Math.round(money);
+					$('.loan-result').show();
+					$('#payment').text(finalmoney+"元");
+				} 
+			});
+
+			$(".clickitem").click(function(){
+				var idname = $(this).attr("data");
+				var title = $(this).attr("title");
+				$("#report").show();
+				$("#reportinfo").html($('#'+idname).html());
+				$("#title").text(title);
+				$("#mainbox").hide();
+			});
+
+			$(document).on("click","#reback",function(){
+				$("#mainbox").show();
+				$("#report").hide();
+			});
+			var imgUrl = "img/carimg.jpg";  //注意必须是绝对路径
+
+			var lineLink = "#";   //同样，必须是绝对路径
+			var descContent = '奥迪A6 2004款 奥迪A6 1.8（125马力）'; //分享给朋友或朋友圈时的文字简介
+			var shareTitle = '车辆补充描述';  //分享title
+			var appid = ''; //apiID，可留空
+
+			function shareFriend() {
+			WeixinJSBridge.invoke('sendAppMessage',{
+			   "appid": appid,
+			   "img_url": imgUrl,
+			   "img_width": "200",
+			   "img_height": "200",
+			   "link": lineLink,
+			   "desc": descContent,
+			   "title": shareTitle
+			}, function(res) {
+			   //_report('send_msg', res.err_msg);
+			})
+			}
+			function shareTimeline() {
+			WeixinJSBridge.invoke('shareTimeline',{
+			   "img_url": imgUrl,
+			   "img_width": "200",
+			   "img_height": "200",
+			   "link": lineLink,
+			   "desc": descContent,
+			   "title": shareTitle
+			}, function(res) {
+				  //_report('timeline', res.err_msg);
+			});
+			}
+			function shareWeibo() {
+			WeixinJSBridge.invoke('shareWeibo',{
+			   "content": descContent,
+			   "url": lineLink,
+			}, function(res) {
+			   //_report('weibo', res.err_msg);
+			});
+			}
+			// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			// 发送给好友
+			WeixinJSBridge.on('menu:share:appmessage', function(argv){
+			   shareFriend();
+			});
+			// 分享到朋友圈
+			WeixinJSBridge.on('menu:share:timeline', function(argv){
+			   shareTimeline();
+			});
+			// 分享到微博
+			WeixinJSBridge.on('menu:share:weibo', function(argv){
+			   shareWeibo();
+			});
+			}, false);
+		});
+	</script>
+	</head>
+	<body>
+<div id="mainbox">
+      <header class="mo-header">
+    <div class="mo-header-left"> <a href="#"> 首页 </a> <i class="iconfont">&#xe61d;</i> <a href="#"> 买车 </a> <i class="iconfont">&#xe61d;</i> <span> 车辆详情 </span> </div>
+  </header>
+      <!--图片展示-->
+      <div id="slideBox" class="slideBox">
+    <div class="bd">
+          <ul>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+      </ul>
+        </div>
+    <div class="hd">
+          <ul>
+      </ul>
+        </div>
+  </div>
+      <script type="text/javascript">
+	TouchSlide({ 
+		slideCell:"#slideBox",
+		titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+		mainCell:".bd ul", 
+		effect:"leftLoop", 
+		autoPage:true,//自动分页
+		autoPlay:true //自动播放
+	});
+</script> 
+      <!-- 图片展示 -->
+      <div class="car-detail-box">
+    <h3 class="car-allname">奥迪A6 2004款 奥迪A6 1.8（125马力）</h3>
+    <p class="nowprice">100.00万元</p>
+    <p class="newprice"><span class="pull-right">2016-08-26</span>同型新车价格(含税) : 30.80万</p>
+  </div>
+      <div class="car-box">
+    <h3><span class="title">亮点配置</span></h3>
+    <div class="box">
+          <ul class="configlist clearfix">
+        <li>真皮座椅</li>
+      </ul>
+        </div>
+  </div>
+      <div class="item-box clearfix">
+    <div class="itemlist rightline">
+          <p class="text-muted">上牌时间</p>
+          <p>2016-08</p>
+        </div>
+    <div class="itemlist rightline">
+          <p class="text-muted">表显里程</p>
+          <p>100.00万公里</p>
+        </div>
+    <div class="itemlist rightline">
+          <p class="text-muted">排量</p>
+          <p>1.8</p>
+        </div>
+    <div class="itemlist">
+          <p class="text-muted">变速箱</p>
+          <p>手动</p>
+        </div>
+  </div>
+      <div class="car-box">
+    <h3><span class="title">检测报告</span></h3>
+    <div class="box">
+          <ul class="comreportlist">
+        <li class="clearfix"><span class="title">检测依据：</span>【国标GB/T30323-2013】二手车鉴定评估技术规范 </li>
+        <li class="clearfix"><span class="title">事故排查：</span> 非事故车、火烧车、水淹车</li>
+        <li class="clearfix"> <span class="title">车身外观：</span> <span class="detail"><span class="orange01">有瑕疵</span> <a href="javascript:;" class="clickitem" data="item1" title="车身外观检测">( 查看详细检测项 )</a></span>
+            <li class="clearfix"> <span class="title">发动机舱：</span> <span class="detail"><span class="orange01">有异常</span> <a href="javascript:;" class="clickitem" data="item2" title="发动机舱检测">( 查看详细检测项 )</a></span> </li>
+        <li class="clearfix"> <span class="title">驾驶舱：</span> <span class="detail"><span class="orange01">有异常</span> <a href="javascript:;" class="clickitem" data="item3" title="驾驶舱检测">( 查看详细检测项 )</a></span> </li>
+        <li class="clearfix"> <span class="title">启动：</span> <span class="detail"><span class="orange01">有异常</span> <a href="javascript:;" class="clickitem" data="item4" title="启动检测">( 查看详细检测项 )</a></span>
+            <li class="clearfix"> <span class="title">路试：</span> <span class="detail">无异常 <a href="javascript:;" class="clickitem" data="item5" title="路试检测">( 查看详细检测项 )</a></span> </li>
+        <li class="clearfix"> <span class="title">底盘：</span> <span class="detail">无异常 <a href="javascript:;" class="clickitem" data="item6" title="底盘检测">( 查看详细检测项 )</a></span> </li>
+        <li class="clearfix"> <span class="title">零部件：</span> <span class="detail">无异常 <a href="javascript:;" class="clickitem" data="item7" title="零部件检测">( 查看详细检测项 )</a></span> </li>
+        <li class="clearfix"> <span class="title">总分：</span> <span class="mycode">87.0 <span> </li>
+      </ul>
+          <div class="reportbox" id="item1" style="display:none;"> 
+        <!--<h4><span class="title">车身外观</span></h4>-->
+        <div class="surface">
+              <ul class="statuslist clearfix">
+            <li class="right">正常</li>
+            <li class="wrong">异常</li>
+          </ul>
+              <div class="p20">
+            <ul class="comreportlist comreport-box">
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 发动机舱盖表面</li>
+                  <li><span class="s_wrong"></span> <span class="s_detail"> 有划痕&nbsp;&nbsp; </span> 左前翼子板</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左后翼子板</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右前翼子板</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右后翼子板</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左前门</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右前门</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左后门</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右后门</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 行李舱盖</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 行李箱内侧</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 车顶</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 前保险杠</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 后保险杠</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左前轮</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左后轮</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右前轮</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右后轮</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 前大灯</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 后尾灯</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 前挡风玻璃</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 后挡风玻璃</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 四门车窗玻璃</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 左后视镜</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 右后视镜</li>
+                  <li><span class="s_right"></span> <span class="s_detail"> </span> 轮胎花纹深度是否小于1.6mm</li>
+                </ul>
+          </div>
+            </div>
+      </div>
+          <div class="reportbox" id="item2" style="display:none;"> 
+        <!--<h4><span class="title">发动机舱</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>机油有无冷却液混入</li>
+            <li><span class="s_right"></span>缸盖外有无机油渗漏</li>
+            <li><span class="s_right"></span>前翼子板内缘、水箱框架、横拉梁有无凹凸或修复痕迹</li>
+            <li><span class="s_wrong"></span>散热器格栅有无破损</li>
+            <li><span class="s_right"></span>蓄电池电极桩柱有无腐蚀</li>
+            <li><span class="s_right"></span>蓄电池电解液有无渗漏、缺少</li>
+            <li><span class="s_right"></span>发动机皮带有无老化</li>
+            <li><span class="s_right"></span>油管、水管有无老化、裂痕</li>
+            <li><span class="s_right"></span>线束有无老化、破损</li>
+          </ul>
+            </div>
+      </div>
+          <div class="reportbox" id="item3" style="display:none;"> 
+        <!--<h4><span class="title">驾驶舱</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>车内是否无泡水痕迹</li>
+            <li><span class="s_right"></span>车内后视镜、座椅是否完整、无破损、功能正常</li>
+            <li><span class="s_right"></span>车内是否整洁、无异味</li>
+            <li><span class="s_right"></span>方向盘自由行程转角是否小于15度</li>
+            <li><span class="s_right"></span>车顶及周边内饰是否无破损、松动及裂缝和污迹</li>
+            <li><span class="s_right"></span>仪表台是否无划痕，配件是否无缺失</li>
+            <li><span class="s_right"></span>排档把手柄及护罩是否完好、无破损</li>
+            <li><span class="s_right"></span>储物盒是否无裂痕，配件是否无缺失</li>
+            <li><span class="s_right"></span>天窗是否移动灵活、关闭正常</li>
+            <li><span class="s_wrong"></span>门窗密封条是否良好、无老化</li>
+            <li><span class="s_right"></span>安全带结构是否完整、功能是否正常</li>
+            <li><span class="s_right"></span>驻车制动系统是否灵活有效</li>
+            <li><span class="s_right"></span>玻璃窗升降器、门窗工作是否正常</li>
+            <li><span class="s_right"></span>左、右后视镜折叠装置工作是否正常</li>
+          </ul>
+            </div>
+      </div>
+          <div class="reportbox" id="item4" style="display:none;"> 
+        <!--<h4><span class="title">启动</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>车辆启动是否顺畅(时间少于5秒，或一次启动)</li>
+            <li><span class="s_right"></span>仪表板指示灯显示是否正常，无故障报警</li>
+            <li><span class="s_right"></span>各类灯光和调节功能是否正常</li>
+            <li><span class="s_right"></span>泊车辅助系统工作是否正常</li>
+            <li><span class="s_right"></span>制动防抱死系统（ABS）工作是否正常</li>
+            <li><span class="s_right"></span>空调系统风量、方向调节、分区控制、自动控制、制冷工作是否正常</li>
+            <li><span class="s_right"></span>发动机在冷、热车条件下怠速运转是否稳定</li>
+            <li><span class="s_right"></span>怠速运转时发动机是否无异响，空档状态下逐渐增加发动机转速，发动机声音过渡是否无异响</li>
+            <li><span class="s_wrong"></span>车辆排气是否无异常</li>
+          </ul>
+            </div>
+      </div>
+          <div class="reportbox" id="item5" style="display:none;"> 
+        <!--<h4><span class="title">路试</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>发动机运转，加速是否正常</li>
+            <li><span class="s_right"></span>车辆启动前踩下制动踏板，保持5s-10s,踏板无向下移动的现象</li>
+            <li><span class="s_right"></span>踩住制动踏板启动发动机，踏板是否向下移动</li>
+            <li><span class="s_right"></span>行车制动系最大制动效能在踏板全行程的4/5以内达到</li>
+            <li><span class="s_right"></span>行驶是否无跑偏</li>
+            <li><span class="s_right"></span>变速箱工作是否正常，无异响</li>
+            <li><span class="s_right"></span>发动机在冷、热车条件下怠速运转是否稳定</li>
+            <li><span class="s_right"></span>行驶过程中车辆转向系统是否无异响</li>
+          </ul>
+            </div>
+      </div>
+          <div class="reportbox" id="item6" style="display:none;"> 
+        <!--<h4><span class="title">底盘</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>发动机油底壳是否无渗漏</li>
+            <li><span class="s_right"></span>变速箱体是否无渗漏</li>
+            <li><span class="s_right"></span>转向节臂球销是否无松动</li>
+            <li><span class="s_right"></span>三角臂球销是否无松动</li>
+            <li><span class="s_right"></span>传动轴十字轴是否无松旷</li>
+            <li><span class="s_right"></span>减震器是否无渗漏</li>
+            <li><span class="s_right"></span>减震弹簧是否无损坏</li>
+          </ul>
+            </div>
+      </div>
+          <div class="reportbox" id="item7" style="display:none;"> 
+        <!--<h4><span class="title">零部件</span></h4>-->
+        <ul class="statuslist clearfix">
+              <li class="right">正常</li>
+              <li class="wrong">异常</li>
+            </ul>
+        <div class="p20">
+              <ul class="comreportlist comreport-box">
+            <li><span class="s_right"></span>发动机舱盖锁止</li>
+            <li><span class="s_right"></span>发动机舱盖液压撑杆</li>
+            <li><span class="s_right"></span>后门液压撑杆</li>
+            <li><span class="s_right"></span>各车门锁止</li>
+            <li><span class="s_right"></span>前后雨刮器</li>
+            <li><span class="s_right"></span>立柱密封胶条</li>
+            <li><span class="s_right"></span>排气管及消声器</li>
+            <li><span class="s_right"></span>车轮轮毂</li>
+            <li><span class="s_right"></span>车内后视镜</li>
+            <li><span class="s_right"></span>座椅调节与加热</li>
+            <li><span class="s_right"></span>仪表板出风通道</li>
+            <li><span class="s_right"></span>中央集控</li>
+            <li><span class="s_right"></span>备胎</li>
+            <li><span class="s_right"></span>千斤顶</li>
+            <li><span class="s_right"></span>轮胎扳手及随车工具</li>
+            <li><span class="s_right"></span>三角警示牌</li>
+            <li><span class="s_right"></span>灭火器</li>
+            <li><span class="s_right"></span>全套钥匙</li>
+            <li><span class="s_right"></span>遥控器及功能</li>
+            <li><span class="s_right"></span>喇叭高低音色</li>
+            <li><span class="s_right"></span>玻璃加热功能</li>
+          </ul>
+            </div>
+      </div>
+        </div>
+  </div>
+      <div class="car-box">
+    <h3><a href="/model/124"><span class="more"><i class="iconfont">&#xe61d;</i></span><span class="title">基本信息</span></a></h3>
+    <div class="box">
+          <ul class="carinfobox clearfix">
+        <li> <span class="gray">归属地：</span>北京 </li>
+        <li> <span class="gray">车型：</span>中型车 </li>
+        <li> <span class="gray">颜色：</span>无 </li>
+        <li> <span class="gray">排量：</span>1.8 </li>
+        <li> <span class="gray">变速箱：</span>手动 </li>
+        <li> <span class="gray">行驶里程：</span>100.00万公里 </li>
+        <li> <span class="gray">国产进口：</span>无 </li>
+        <li> <span class="gray">上牌日期：</span>2016-08 </li>
+        <li> <span class="gray">燃油类型：</span>无 </li>
+        <li> <span class="gray">排放标准：</span>欧3 </li>
+        <li> <span class="gray">年检到期：</span>2016-08 </li>
+        <li> <span class="gray">保险到期：</span>2016-08 </li>
+        <li> <span class="gray">车辆用途：</span>无 </li>
+        <li> <span class="gray">定期保养：</span>无 </li>
+      </ul>
+        </div>
+  </div>
+      <div class="car-box">
+    <h3><span class="title">车主描述</span></h3>
+    <div class="box"> 车辆补充描述 </div>
+  </div>
+      <div class="car-box">
+    <h3><span>奥迪</span></h3>
+    <div class="listcar"> <a href="/cars/123" target="_blank">
+      <div class="carimg"> <img data-original="/upload/image/20160416/20160416233545_77774.png" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>奥迪A4L 2013款 奥迪A4L 30 TFSI 自动 舒适型</h4>
+        <p class="caritem">2014-02 上牌 / 20.00万公里</p>
+        <p class="carprice">￥29.10万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/17" target="_blank">
+      <div class="carimg"> <img data-original="/upload/image/20160325/20160325000000_84652.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>奥迪A12013款 奥迪A1 30TFSI Ego 中国限量版</h4>
+        <p class="caritem">2014-06 上牌 / 2.40万公里</p>
+        <p class="carprice">￥16.90万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/107" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>奥迪A8L2008款 奥迪A8L 4.2 FSI quattro 尊贵型</h4>
+        <p class="caritem">2008-08 上牌 / 11.60万公里</p>
+        <p class="carprice">￥42.00万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/11" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>奥迪A8L2010款 奥迪A8L 3.0 FSI 豪华型</h4>
+        <p class="caritem">2010-06 上牌 / 11.20万公里</p>
+        <p class="carprice">￥31.20万</p>
+      </div>
+      </a> </div>
+  </div>
+      <div class="car-box">
+    <h3><span>100.00万元左右的车</span></h3>
+    <div class="listcar"> <a href="/cars/124" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>奥迪A6 2004款 奥迪A6 1.8（125马力）</h4>
+        <p class="caritem">2016-08 上牌 / 100.00万公里</p>
+        <p class="carprice">￥100.00万</p>
+      </div>
+      </a> </div>
+  </div>
+      <div class="clicktel-box"></div>
+      <ul class="bottom-tools clearfix">
+    <li><a href="javascript:;" class="collectbut">收藏</a></li>
+    <li><a href="javascript:;" class="orderbut">预约看车</a></li>
+    <li><a href="tel:010-58480000">拨打电话</a></li>
+  </ul>
+      <a href="javascript:;" id="returntop"></a> 
+      <script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script></div>
+<div id="report" style="display:none;">
+      <header class='mo-header'>
+    <div class='mo-header-left'><a href='javascript:;' id='reback'><i class='iconfont'>&#xe647;</i></a></div>
+    <div class='mo-header-title' id="title">选择城市</div>
+  </header>
+      <div id="reportinfo"></div>
+    </div>
+</body>
+</html>

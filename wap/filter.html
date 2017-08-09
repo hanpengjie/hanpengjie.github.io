@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>光大好车-筛选</title>
+	<meta content="光大好车" name="keywords" />
+	<meta content="光大好车" name="description" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script language="JavaScript">
+		$(function() {
+			$(".onebrand").click(function(){
+				var brandid = $(this).attr("data-index");
+				$.get("#"+brandid, {
+				}, function (data, textStatus){
+					$("#brand-data").show();
+					$("#subbrand-data").html(data);
+					$("#brand-box").hide();
+				});
+			});
+			$("#reback").click(function(){
+				$("#brand-box").show();
+				$("#brand-data").hide();
+			});
+			$(".option-item").click(function(){
+				var value = $(this).attr('data');
+				$(this).addClass('selected').parent().siblings().children().removeClass('selected');
+				$(this).parent().parent().siblings('input').val(value);
+			});
+			$(".comfirm").click(function(){
+				var con = "";
+				var orderby = $("input[name=orderby]").val();
+				if(orderby!=""){
+					con += "ox"+orderby;
+				}
+				var brand = $("input[name=brand]").val();
+				if(brand!=""){
+					con += "ob"+brand;
+				}
+				var subbrand = $("input[name=subbrand]").val();
+				if(subbrand!=""){
+					con += "os"+subbrand;
+				}
+				var model = $("input[name=model]").val();
+				if(model!=""){
+					con += "oj"+model;
+				}
+				var price = $("input[name=price]").val();
+				if(price!=""){
+					con += "op"+price;
+				}
+				var age = $("input[name=age]").val();
+				if(age!=""){
+					con += "oa"+age;
+				}
+				var kilometre = $("input[name=kilometre]").val();
+				if(kilometre!=""){
+					con += "ok"+kilometre;
+				}
+				var transmission = $("input[name=transmission]").val();
+				if(transmission!=""){
+					con += "ot"+transmission;
+				}
+				var gas = $("input[name=gas]").val();
+				if(gas!=""){
+					con += "og"+gas;
+				}
+				var emstandard = $("input[name=emstandard]").val();
+				if(emstandard!=""){
+					con += "oe"+emstandard;
+				}
+				if(con!=""){
+					window.location.href="/buycar/list-"+con;
+				}
+				else{
+					window.location.href="/buycar/";
+				}
+			});
+			$(".reset").click(function(){
+				$("input").attr("value","");
+				$(".option-item").removeClass('selected');
+			});
+		})
+	</script>
+  </head>
+<body>
+<div id="brand-box">
+	<!--内容-->
+	<header class="mo-header">
+		<div class="mo-header-left">
+			<a href="javascript:window.history.go(-1);" class="reback">
+				<i class="iconfont">&#xe647;</i>
+			</a>
+		</div>
+		<div class="mo-header-title">筛选</div>
+	</header>
+</div>
+<input type="hidden" name="orderby" value="">
+<input type="hidden" name="brand" value="172">
+<input type="hidden" name="subbrand" value="2531">
+<div class="filter-box">
+	<input type="hidden" name="model" value="">
+	<div class="filter-title">级别</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="0" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="41" class="option-item">劳斯莱斯</a></li>
+					<li><a href="javascript:;" data="40" class="option-item">超级跑车</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">微型车</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">小型车</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">紧凑型车</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">中型车</a></li>
+					<li><a href="javascript:;" data="5" class="option-item">中大型车</a></li>
+					<li><a href="javascript:;" data="6" class="option-item">豪华车</a></li>
+					<li><a href="javascript:;" data="7" class="option-item">布加迪</a></li>
+					<li><a href="javascript:;" data="8" class="option-item">SUV</a></li>
+					<li><a href="javascript:;" data="9" class="option-item">跑车</a></li>
+					<li><a href="javascript:;" data="38" class="option-item">皮卡</a></li>
+					<li><a href="javascript:;" data="39" class="option-item">面包车</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="price" value="">
+	<div class="filter-title">价格</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">3万以下</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">3-5万</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">5-8万</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">8-10万</a></li>
+					<li><a href="javascript:;" data="5" class="option-item">10-15万</a></li>
+					<li><a href="javascript:;" data="6" class="option-item">15-20万</a></li>
+					<li><a href="javascript:;" data="7" class="option-item">20-30万</a></li>
+					<li><a href="javascript:;" data="8" class="option-item">30-50万</a></li>
+					<li><a href="javascript:;" data="9" class="option-item">50万以上</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="age" value="">
+	<div class="filter-title">车龄</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">1年内</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">1-3年</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">3-5年</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">5年以上</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="kilometre" value="">
+	<div class="filter-title">里程</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">1万公里以下</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">3万公里以下</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">5万公里以下</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">10万公里以下</a></li>
+					<li><a href="javascript:;" data="5" class="option-item">10万公里以上</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="transmission" value="">
+	<div class="filter-title">变速箱</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="0" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">自动</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">手动</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">手自一体</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="gas" value="">
+	<div class="filter-title">排量</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">1.0L以下</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">1.1-1.5L</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">1.6-2.0L</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">2.1-3.0L</a></li>
+					<li><a href="javascript:;" data="5" class="option-item">3.0L及以上</a></li>
+			</ul>
+</div>
+<div class="filter-box">
+	<input type="hidden" name="emstandard" value="">
+	<div class="filter-title">燃油类型</div>
+	<ul class="filter-option-list clearfix">
+		<li><a href="javascript:;" data="" class="option-item">不限</a></li>
+					<li><a href="javascript:;" data="1" class="option-item">-</a></li>
+					<li><a href="javascript:;" data="2" class="option-item">222</a></li>
+					<li><a href="javascript:;" data="3" class="option-item">京5</a></li>
+					<li><a href="javascript:;" data="4" class="option-item">国1</a></li>
+					<li><a href="javascript:;" data="5" class="option-item">国2</a></li>
+					<li><a href="javascript:;" data="6" class="option-item">国3</a></li>
+					<li><a href="javascript:;" data="7" class="option-item">国4</a></li>
+					<li><a href="javascript:;" data="8" class="option-item">国5</a></li>
+					<li><a href="javascript:;" data="9" class="option-item">欧2</a></li>
+					<li><a href="javascript:;" data="10" class="option-item">欧3</a></li>
+					<li><a href="javascript:;" data="11" class="option-item">欧4</a></li>
+					<li><a href="javascript:;" data="12" class="option-item">欧5</a></li>
+					<li><a href="javascript:;" data="13" class="option-item">欧6</a></li>
+			</ul>
+</div>
+<div class="comfirm-box"></div>
+<div class="clearfix filter-menu"><a href="javascript:;" class="reset">重置</a><a href="javascript:;" class="comfirm">确定</a></div>
+<a href="javascript:;" id="returntop"></a>
+<script type="text/javascript" src="script/jquery.lazyload.js"></script>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script></body>
+</html>

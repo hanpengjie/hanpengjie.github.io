@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>- 马自达3星骋 2012款 马自达3 星骋 两厢 2.0L 自动 豪华运动型 - 锐车官网，二手车源码，二手车app,二手车手机wap版,二手车代码，二手车程序，二手车建站，汽车网站源码，汽车网站系统，汽车门户网站系统，php+mysql-锐车官方网站</title>
+	<meta content="二手车" name="keywords" />
+	<meta content="二手车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/layer.mobile/layer.js"></script>
+	<script type="text/javascript" src="script/TouchSlide.1.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//预约
+			$(".orderbut").click(function(){
+				var mythis = $(this);
+				var textname = $(this).text();
+				$.get("/index.php?m=ajax&ajax=1&order=1",{
+					pid : 78,
+					uid : 184
+				}, function (data,textStatus){
+					if(data==1){
+						if(textname=="预约看车"){
+							mythis.text("预约成功");
+						}
+						else{
+							layer.open({
+								btn: ['确定'],
+								content:'您已经预约过了！'
+							});
+						}
+					}
+					else if(data==2){
+						layer.open({
+							btn: ['确定'],
+							content:'清登录后再预约！'
+						});
+					}
+					else{
+						layer.open({
+							btn: ['确定'],
+							content:'预约失败!'
+						});
+					}
+				});
+			});
+			//添加收藏
+			$(".collectbut").click(function(){
+				var mythis = $(this);
+				var textname = $(this).text();
+				$.get("/index.php?m=ajax&ajax=1&collect=1",{
+					pid : 78
+				}, function (data,textStatus){
+					if(data==1){
+						if(textname=="收藏"){
+							mythis.text("取消收藏");
+						}
+						else{
+							mythis.text("收藏");
+						}
+					}
+					else if(data==2){
+						layer.open({
+							btn: ['确定'],
+							content:'清登录后再收藏!'
+						});
+					}
+					else{
+						layer.open({
+							btn: ['确定'],
+							content:'收藏失败!'
+						});
+					}
+				});
+			});
+			
+			//计算贷款
+			$(".clickloan").click(function(){
+				layer.open({
+					type: 1,
+					skin: 'layui-layer-rim', //加上边框
+					area: ['620px', '340px'], //宽高
+					content: $('#loan')
+				});
+			});
+			$("#loanbut").click(function() {
+				var down_payment=$("#down_payment").val();
+				var amount=$("input[name='amount']").val();
+				var financing_maturity=$("#financing_maturity").val();
+				if(down_payment  && amount && financing_maturity)
+				{
+					if(financing_maturity==12){ var maturity=0.0388}
+					if(financing_maturity==24){ var maturity=0.0777}
+					if(financing_maturity==36){ var maturity=0.01147689}
+					var money= (((amount*(1-down_payment))*(1+maturity)) / financing_maturity);
+					var finalmoney=Math.round(money);
+					$('.loan-result').show();
+					$('#payment').text(finalmoney+"元");
+				} 
+			});
+
+			$(".clickitem").click(function(){
+				var idname = $(this).attr("data");
+				var title = $(this).attr("title");
+				$("#report").show();
+				$("#reportinfo").html($('#'+idname).html());
+				$("#title").text(title);
+				$("#mainbox").hide();
+			});
+
+			$(document).on("click","#reback",function(){
+				$("#mainbox").show();
+				$("#report").hide();
+			});
+			var imgUrl = "img/carimg.jpg";  //注意必须是绝对路径
+
+			var lineLink = "#";   //同样，必须是绝对路径
+			var descContent = '马自达3星骋 2012款 马自达3 星骋 两厢 2.0L 自动 豪华运动型'; //分享给朋友或朋友圈时的文字简介
+			var shareTitle = '这辆星骋是我从别人手里买来的，因为打算换车，所以想把这辆车转让出去。个人觉得性价比不错，空间足够日常家用，平时上下班和外出很适合代步。目前跑了6万多公里，按时做的保养，外观上有轻微剐蹭，但不影响日常行驶。如果有朋友喜欢这辆车，就跟我联系吧。';  //分享title
+			var appid = ''; //apiID，可留空
+
+			function shareFriend() {
+			WeixinJSBridge.invoke('sendAppMessage',{
+			   "appid": appid,
+			   "img_url": imgUrl,
+			   "img_width": "200",
+			   "img_height": "200",
+			   "link": lineLink,
+			   "desc": descContent,
+			   "title": shareTitle
+			}, function(res) {
+			   //_report('send_msg', res.err_msg);
+			})
+			}
+			function shareTimeline() {
+			WeixinJSBridge.invoke('shareTimeline',{
+			   "img_url": imgUrl,
+			   "img_width": "200",
+			   "img_height": "200",
+			   "link": lineLink,
+			   "desc": descContent,
+			   "title": shareTitle
+			}, function(res) {
+				  //_report('timeline', res.err_msg);
+			});
+			}
+			function shareWeibo() {
+			WeixinJSBridge.invoke('shareWeibo',{
+			   "content": descContent,
+			   "url": lineLink,
+			}, function(res) {
+			   //_report('weibo', res.err_msg);
+			});
+			}
+			// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			// 发送给好友
+			WeixinJSBridge.on('menu:share:appmessage', function(argv){
+			   shareFriend();
+			});
+			// 分享到朋友圈
+			WeixinJSBridge.on('menu:share:timeline', function(argv){
+			   shareTimeline();
+			});
+			// 分享到微博
+			WeixinJSBridge.on('menu:share:weibo', function(argv){
+			   shareWeibo();
+			});
+			}, false);
+		});
+	</script>
+	</head>
+	<body>
+<div id="mainbox">
+      <header class="mo-header">
+    <div class="mo-header-left"> <a href="#"> 首页 </a> <i class="iconfont">&#xe61d;</i> <a href="#"> 买车 </a> <i class="iconfont">&#xe61d;</i> <span> 车辆详情 </span> </div>
+  </header>
+      <!--图片展示-->
+      <div id="slideBox" class="slideBox">
+    <div class="bd">
+          <ul>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+        <li><a class="pic" href="#"><img src="img/carimg.jpg" /></a></li>
+      </ul>
+        </div>
+    <div class="hd">
+          <ul>
+      </ul>
+        </div>
+  </div>
+      <script type="text/javascript">
+	TouchSlide({ 
+		slideCell:"#slideBox",
+		titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+		mainCell:".bd ul", 
+		effect:"leftLoop", 
+		autoPage:true,//自动分页
+		autoPlay:true //自动播放
+	});
+</script> 
+      <!-- 图片展示 -->
+      <div class="car-detail-box">
+    <h3 class="car-allname">马自达3星骋 2012款 马自达3 星骋 两厢 2.0L 自动 豪华运动型</h3>
+    <p class="nowprice">8.00万元</p>
+    <p class="newprice"><span class="pull-right">2016-03-26</span>同型新车价格(含税) : 14.98万</p>
+  </div>
+      <div class="item-box clearfix">
+    <div class="itemlist rightline">
+          <p class="text-muted">上牌时间</p>
+          <p>2012-01</p>
+        </div>
+    <div class="itemlist rightline">
+          <p class="text-muted">表显里程</p>
+          <p>6.36万公里</p>
+        </div>
+    <div class="itemlist rightline">
+          <p class="text-muted">排量</p>
+          <p>2.0</p>
+        </div>
+    <div class="itemlist">
+          <p class="text-muted">变速箱</p>
+          <p>5挡 手自一体</p>
+        </div>
+  </div>
+      <div class="car-box">
+    <h3><a href="#"><span class="more"><i class="iconfont">&#xe61d;</i></span><span class="title">基本信息</span></a></h3>
+    <div class="box">
+          <ul class="carinfobox clearfix">
+        <li> <span class="gray">归属地：</span>北京 </li>
+        <li> <span class="gray">车型：</span>小型车 </li>
+        <li> <span class="gray">颜色：</span>白色 </li>
+        <li> <span class="gray">排量：</span>2.0 </li>
+        <li> <span class="gray">变速箱：</span>5挡 手自一体 </li>
+        <li> <span class="gray">行驶里程：</span>6.36万公里 </li>
+        <li> <span class="gray">国产进口：</span>无 </li>
+        <li> <span class="gray">上牌日期：</span>2012-01 </li>
+        <li> <span class="gray">燃油类型：</span>无 </li>
+        <li> <span class="gray">排放标准：</span>无 </li>
+        <li> <span class="gray">年检到期：</span>无 </li>
+        <li> <span class="gray">保险到期：</span>无 </li>
+        <li> <span class="gray">车辆用途：</span>无 </li>
+        <li> <span class="gray">定期保养：</span>无 </li>
+      </ul>
+        </div>
+  </div>
+      <div class="car-box">
+    <h3><span class="title">车主描述</span></h3>
+    <div class="box"> 这辆星骋是我从别人手里买来的，因为打算换车，所以想把这辆车转让出去。个人觉得性价比不错，空间足够日常家用，平时上下班和外出很适合代步。目前跑了6万多公里，按时做的保养，外观上有轻微剐蹭，但不影响日常行驶。如果有朋友喜欢这辆车，就跟我联系吧。 </div>
+  </div>
+      <div class="car-box">
+    <h3><span class="title">商家信息</span></h3>
+    <div class="box">
+          <p>北京普艾斯科技</p>
+          <p>看车地点：北京海淀西三旗新龙大厦B座810</p>
+          <p>联系电话：010-90898987</p>
+          <a href="/index.php?m=shop&id=184" class="user-menu">进入商家店铺</a> </div>
+  </div>
+      <div class="car-box">
+    <h3><span>马自达</span></h3>
+    <div class="listcar"> <a href="/cars/39" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>马自达 睿翼2009款 睿翼 2.5L 至尊版</h4>
+        <p class="caritem">2009-11 上牌 / 6.27万公里</p>
+        <p class="carprice">￥10.30万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/102" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>马自达52007款 马自达5 2.0L 自动舒适型</h4>
+        <p class="caritem">2010-12 上牌 / 6.90万公里</p>
+        <p class="carprice">￥9.50万</p>
+      </div>
+      </a> </div>
+  </div>
+      <div class="car-box">
+    <h3><span>8.00万元左右的车</span></h3>
+    <div class="listcar"> <a href="/cars/19" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>大众 速腾2011款 速腾 1.6L 手动 舒适型</h4>
+        <p class="caritem">2011-10 上牌 / 6.10万公里</p>
+        <p class="carprice">￥7.50万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/60" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>别克 君威2010款 君威 2.0 世博版</h4>
+        <p class="caritem">2011-04 上牌 / 7.00万公里</p>
+        <p class="carprice">￥10.50万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/78" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>马自达3星骋 2012款 马自达3 星骋 两厢 2.0L 自动 豪华运动型</h4>
+        <p class="caritem">2012-01 上牌 / 6.36万公里</p>
+        <p class="carprice">￥8.00万</p>
+      </div>
+      </a> </div>
+    <div class="listcar"> <a href="/cars/39" target="_blank">
+      <div class="carimg"> <img data-original="img/carimg.jpg" width="300" height="230" class="img-responsive lazy"/> </div>
+      <div class="carinfo">
+        <h4>马自达 睿翼2009款 睿翼 2.5L 至尊版</h4>
+        <p class="caritem">2009-11 上牌 / 6.27万公里</p>
+        <p class="carprice">￥10.30万</p>
+      </div>
+      </a> </div>
+  </div>
+      <div class="clicktel-box"></div>
+      <ul class="bottom-tools clearfix">
+    <li><a href="javascript:;" class="collectbut">收藏</a></li>
+    <li><a href="javascript:;" class="orderbut">预约看车</a></li>
+    <li><a href="tel:010-90898987">拨打电话</a></li>
+  </ul>
+      <a href="javascript:;" id="returntop"></a> 
+      <script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+      <script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script></div>
+<div id="report" style="display:none;">
+      <header class='mo-header'>
+    <div class='mo-header-left'><a href='javascript:;' id='reback'><i class='iconfont'>&#xe647;</i></a></div>
+    <div class='mo-header-title' id="title">选择城市</div>
+  </header>
+      <div id="reportinfo"></div>
+    </div>
+</body>
+</html>

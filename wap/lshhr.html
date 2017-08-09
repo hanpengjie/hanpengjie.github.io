@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>光大好车-连锁合伙人</title>
+	<meta content="光大好车" name="keywords" />
+	<meta content="光大好车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script type="text/javascript" src="script/layer.js"></script>
+	<script type="text/javascript" src="script/search.js"></script>
+	<script language="JavaScript">
+	$(function() {
+		//选择品牌车型
+		$("#brand").selectOption('brand');
+		$("#subbrand").selectOption('subbrand');
+		$("#subsubbrand").selectOption('subsubbrand');
+		$('.form_date').datetimepicker({
+			language:'zh-CN',
+			format: 'yyyy-mm',
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 4,
+			minView: 3,
+			forceParse: 0
+		});
+
+
+		$(document).on("click",".optionlist li",function(){
+			$("#selectbox").hide();
+			$("#mainbox").show();
+			var idname = $(this).attr('option-name');
+			var idvalue = $(this).attr('data-index');
+			$("#"+idname+"").children("input[name="+idname+"]").val(idvalue);
+			$("#"+idname+"").children("span").text($(this).text());
+		});
+
+		$(document).on("click","#reback",function(){
+			$("#selectbox").hide();
+			$("#mainbox").show();
+			$("#selectontime").hide();
+		});
+
+		$("form").submit(function(){
+			if($("input[name='brand']").val() == ""){
+				layer.open({
+					btn: ['确定'],
+					content:'请选择品牌！'
+				});
+				$("input[name='brand']").focus();
+				return false;
+			}
+			if($("input[name='subbrand']").val() == ""){
+				layer.open({
+					btn: ['确定'],
+					content:'请选择车系！'
+				});
+				$("input[name='subbrand']").focus();
+				return false;
+			}
+			if($("input[name='subsubbrand']").val() == ""){
+				layer.open({
+					btn: ['确定'],
+					content:'请选择车型！'
+				});
+				$("input[name='subsubbrand']").focus();
+				return false;
+			}
+			if($("input[name='ontime']").val() == "" ){
+				layer.open({
+					btn: ['确定'],
+					content:'请选择上牌日期！'
+				});
+				$("input[name='ontime']").focus();
+				return false;
+			}
+			if($("input[name='kilometre']").val() == ""){
+				layer.open({
+					btn: ['确定'],
+					content:'请填写表显里程！'
+				});
+				$("input[name='kilometre']").focus();
+				return false;
+			}
+			if($("input[name='mobilephone']").val() == ""){
+				layer.open({
+					btn: ['确定'],
+					content:'请填写联系电话！'
+				})
+				$("input[name='mobilephone']").focus();
+				return false;
+			}
+		});
+		var imgdiv,loading;
+		$('.inputfile').localResizeIMG({
+			width: 400,
+			quality: 1,
+			success: function (result) {
+				loading.show();
+				var submitData={
+					base64_string:result.clearBase64, 
+				}; 
+				$.ajax({
+				   type: "POST",
+				   url: "/mobile/upload.php",
+				   data: submitData,
+				   dataType:"json",
+				   success: function(data){
+					 if (0 == data.status) {
+						//alert(data.content);
+						return false;
+					 }else{
+						//alert(data.content);
+						var attstr= '<img src="'+data.url+'">'; 
+						imgdiv.html(attstr+"<input type='hidden' name='p_pics[]' value='"+data.url+"'>");
+						loading.hide();
+						return false;
+					 }
+				   }, 
+					complete :function(XMLHttpRequest, textStatus){
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){ //上传失败 
+					   alert(XMLHttpRequest.status);
+					   alert(XMLHttpRequest.readyState);
+					   alert(textStatus);
+					}
+				}); 
+			}
+		});
+
+		$("#piclist li").children('div').children('.add').click(function(){
+			$(this).siblings('.inputfile').click();
+			imgdiv = $(this).siblings(".pic");
+			loading = $(this).siblings(".loading");
+		});
+	});
+	</script>
+	</head>
+	<body>
+<div id="mainbox"> 
+      <!--内容-->
+      <header class="mo-header">
+    <div class="mo-header-left"> <a href="/index.php?city=quanguo"> 首页 </a> <i class="iconfont">&#xe61d;</i> <a href="/index.php?m=sellcar"> 我要卖车 </a> </div>
+  </header>
+      <form method="post" action="index.php?m=sellcar">
+    <div class="formlist">
+          <ul>
+        <li><span class="value">
+          <input type="text" name="kilometre" value="" size="16" placeholder="请输入表显里程">
+          万公里</span>行驶里程</li>
+        <li><span class="value">
+          <input type="text" name="mobilephone" value="" size="16" placeholder="请输入手机号">
+          </span>联系电话</li>
+      </ul>
+        </div>
+    <div class="btn-box">
+          <input type="submit" value="提交" class="btn btn-danger btn-block">
+          <input type="hidden" name="ac" value="sell">
+        </div>
+  </form>
+    </div>
+<div id="selectbox"> </div>
+<a href="javascript:;" id="returntop"></a> 
+<script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script>
+</body>
+</html>

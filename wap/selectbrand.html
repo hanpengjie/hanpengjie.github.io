@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>光大好车-选择品牌</title>
+	<meta content="光大好车" name="keywords" />
+	<meta content="光大好车" name="description" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="iconfont/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/bootstrap.min.js"></script>
+	<script language="JavaScript">
+		$(function() {
+			$(".onebrand").click(function(){
+				var brandid = $(this).attr("data-index");
+				$.get("/index.php?m=ajax&ajax=1&brandid="+brandid, {
+				}, function (data, textStatus){
+					$("#brand-data").show();
+					$("#subbrand-data").html(data);
+					$("#brand-box").hide();
+				});
+			});
+			$("#reback").click(function(){
+				$("#brand-box").show();
+				$("#brand-data").hide();
+			});
+		})
+	</script>
+	</head>
+	<body>
+<div id="brand-box"> 
+      <!--内容-->
+      <header class="mo-header">
+    <div class="mo-header-left"> <a href="javascript:window.history.go(-1);" class="reback"> <i class="iconfont">&#xe647;</i> </a> </div>
+    <div class="mo-header-title">选择品牌</div>
+  </header>
+      <div class="brandtitle"> 热门品牌 </div>
+      <ul class="combrand clearfix">
+    <li class="onebrand" data-index="2"> <img src="img/b1.jpg">
+          <p>阿斯顿·马丁</p>
+        </li>
+    <li class="onebrand" data-index="177"> <img src="img/b2.jpg">
+          <p>AA1</p>
+        </li>
+    <li class="onebrand" data-index="176"> <img src="img/b3.jpg">
+          <p>奥马</p>
+        </li>
+    <li class="onebrand" data-index="178"> <img src="img/b4.jpg">
+          <p>阿斯顿马丁</p>
+        </li>
+    <li class="onebrand" data-index="8"> <img src="img/b8.jpg">
+          <p>比亚迪</p>
+        </li>
+    <li class="onebrand" data-index="5"> <img src="img/b5.jpg">
+          <p>本田</p>
+        </li>
+    <li class="onebrand" data-index="6"> <img src="img/b6.jpg">
+          <p>别克</p>
+        </li>
+    <li class="onebrand" data-index="16"> <img src="img/b16.jpg">
+          <p>宾利</p>
+        </li>
+  </ul>
+      <div class="marklist clearfix"> <a href="#1">1</a> <a href="#A">A</a> <a href="#B">B</a> <a href="#C">C</a> <a href="#D">D</a> <a href="#F">F</a> <a href="#G">G</a> <a href="#H">H</a> <a href="#J">J</a> <a href="#K">K</a> <a href="#L">L</a> <a href="#M">M</a> <a href="#N">N</a> <a href="#O">O</a> <a href="#Others">Others</a> <a href="#Q">Q</a> <a href="#R">R</a> <a href="#S">S</a> <a href="#T">T</a> <a href="#W">W</a> <a href="#X">X</a> <a href="#Y">Y</a> <a href="#Z">Z</a> </div>
+      <div class="brandtitle"> * </div>
+      <ul class="brandlist">
+    <li><a href="#">不限品牌</a></li>
+  </ul>
+      <div id="1">
+    <div class="brandtitle"> 1 </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="172"><img src="img/20161014153441_64371.jpg">11</li>
+        </ul>
+  </div>
+      <div id="A">
+    <div class="brandtitle"> A </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="1"><img src="img/20161025152252_29987.jpg">奥迪</li>
+          <li class="onebrand" data-index="2"><img src="img/b2.jpg">阿斯顿·马丁</li>
+          <li class="onebrand" data-index="3"><img src="img/b3.jpg">阿尔法·罗密欧</li>
+          <li class="onebrand" data-index="4"><img src="img/b4.jpg">AC Schnitzer</li>
+          <li class="onebrand" data-index="171"><img src="img/20161013095723_80405.png">asfa</li>
+          <li class="onebrand" data-index="176"><img src="">奥马</li>
+          <li class="onebrand" data-index="177"><img src="">AA1</li>
+          <li class="onebrand" data-index="178"><img src="img/20170114213930_56428.jpg">阿斯顿马丁</li>
+        </ul>
+  </div>
+      <div id="B">
+    <div class="brandtitle"> B </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="5"><img src="img/b5.jpg">本田</li>
+          <li class="onebrand" data-index="6"><img src="img/b6.jpg">别克</li>
+          <li class="onebrand" data-index="7"><img src="img/b7.jpg">宝马</li>
+          <li class="onebrand" data-index="8"><img src="img/b8.jpg">比亚迪</li>
+          <li class="onebrand" data-index="9"><img src="img/b9.jpg">奔驰</li>
+          <li class="onebrand" data-index="10"><img src="img/b10.jpg">标致</li>
+          <li class="onebrand" data-index="11"><img src="img/b11.jpg">保时捷</li>
+          <li class="onebrand" data-index="12"><img src="img/b12.jpg">奔腾</li>
+          <li class="onebrand" data-index="13"><img src="img/b13.jpg">北京汽车</li>
+          <li class="onebrand" data-index="14"><img src="img/b14.jpg">北汽制造</li>
+          <li class="onebrand" data-index="15"><img src="img/b15.jpg">宝骏</li>
+          <li class="onebrand" data-index="16"><img src="img/b16.jpg">宾利</li>
+          <li class="onebrand" data-index="17"><img src="img/b17.jpg">北汽威旺</li>
+          <li class="onebrand" data-index="18"><img src="img/b18.jpg">布加迪</li>
+          <li class="onebrand" data-index="19"><img src="img/b19.jpg">巴博斯</li>
+          <li class="onebrand" data-index="20"><img src="img/b20.jpg">保斐利</li>
+          <li class="onebrand" data-index="115"><img src="img/b115.jpg">北汽绅宝</li>
+          <li class="onebrand" data-index="144"><img src="img/b144.jpg">宝龙</li>
+          <li class="onebrand" data-index="156"><img src="img/b156.jpg">北汽幻速</li>
+          <li class="onebrand" data-index="167"><img src="img/b167.jpg">北汽新能源</li>
+          <li class="onebrand" data-index="173"><img src="">奔驰</li>
+          <li class="onebrand" data-index="174"><img src="">本田</li>
+        </ul>
+  </div>
+      <div id="C">
+    <div class="brandtitle"> C </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="21"><img src="img/b21.jpg">长安轿车</li>
+          <li class="onebrand" data-index="22"><img src="img/b22.jpg">长城</li>
+          <li class="onebrand" data-index="23"><img src="img/b23.jpg">长安商用</li>
+          <li class="onebrand" data-index="24"><img src="img/b24.jpg">昌河</li>
+        </ul>
+  </div>
+      <div id="D">
+    <div class="brandtitle"> D </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="25"><img src="img/b25.jpg">大众</li>
+          <li class="onebrand" data-index="26"><img src="img/b26.jpg">东风风行</li>
+          <li class="onebrand" data-index="27"><img src="img/b27.jpg">东南</li>
+          <li class="onebrand" data-index="28"><img src="img/b28.jpg">东风小康</li>
+          <li class="onebrand" data-index="29"><img src="img/b29.jpg">道奇</li>
+          <li class="onebrand" data-index="30"><img src="img/b30.jpg">东风风神</li>
+          <li class="onebrand" data-index="31"><img src="img/b31.jpg">DS</li>
+          <li class="onebrand" data-index="32"><img src="img/b32.jpg">东风风度</li>
+          <li class="onebrand" data-index="33"><img src="img/b33.jpg">东风</li>
+          <li class="onebrand" data-index="34"><img src="img/b34.jpg">大通</li>
+          <li class="onebrand" data-index="142"><img src="img/b142.jpg">大迪汽车</li>
+          <li class="onebrand" data-index="170"><img src="img/20161013100414_77869.png">东风风光</li>
+        </ul>
+  </div>
+      <div id="F">
+    <div class="brandtitle"> F </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="35"><img src="img/b35.jpg">福特</li>
+          <li class="onebrand" data-index="36"><img src="img/b36.jpg">丰田</li>
+          <li class="onebrand" data-index="37"><img src="img/b37.jpg">菲亚特</li>
+          <li class="onebrand" data-index="38"><img src="img/b38.jpg">法拉利</li>
+          <li class="onebrand" data-index="39"><img src="img/b39.jpg">福田</li>
+          <li class="onebrand" data-index="40"><img src="img/b40.jpg">福迪</li>
+          <li class="onebrand" data-index="41"><img src="img/b41.jpg">飞驰商务车</li>
+          <li class="onebrand" data-index="42"><img src="img/b42.jpg">菲斯克</li>
+          <li class="onebrand" data-index="43"><img src="img/b43.jpg">弗那萨利</li>
+          <li class="onebrand" data-index="162"><img src="img/b162.jpg">福汽启腾</li>
+        </ul>
+  </div>
+      <div id="G">
+    <div class="brandtitle"> G </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="44"><img src="img/b44.jpg">广汽传祺</li>
+          <li class="onebrand" data-index="45"><img src="img/b45.jpg">广汽吉奥</li>
+          <li class="onebrand" data-index="46"><img src="img/b46.jpg">观致</li>
+          <li class="onebrand" data-index="47"><img src="img/b47.jpg">GMC</li>
+          <li class="onebrand" data-index="48"><img src="img/b48.jpg">光冈</li>
+          <li class="onebrand" data-index="49"><img src="img/b49.jpg">广汽日野</li>
+        </ul>
+  </div>
+      <div id="H">
+    <div class="brandtitle"> H </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="50"><img src="img/b50.jpg">哈弗</li>
+          <li class="onebrand" data-index="51"><img src="img/b51.jpg">海马</li>
+          <li class="onebrand" data-index="52"><img src="img/b52.jpg">华泰</li>
+          <li class="onebrand" data-index="53"><img src="img/b53.jpg">红旗</li>
+          <li class="onebrand" data-index="54"><img src="img/b54.jpg">海马商用车</li>
+          <li class="onebrand" data-index="55"><img src="img/b55.jpg">黄海</li>
+          <li class="onebrand" data-index="56"><img src="img/b56.jpg">哈飞</li>
+          <li class="onebrand" data-index="57"><img src="img/b57.jpg">海格</li>
+          <li class="onebrand" data-index="58"><img src="img/b58.jpg">恒天汽车</li>
+          <li class="onebrand" data-index="59"><img src="img/b59.jpg">汇众</li>
+          <li class="onebrand" data-index="145"><img src="img/b145.jpg">悍马</li>
+          <li class="onebrand" data-index="146"><img src="img/b146.jpg">华普</li>
+          <li class="onebrand" data-index="147"><img src="img/b147.jpg">华翔富奇</li>
+          <li class="onebrand" data-index="160"><img src="img/b160.jpg">华颂</li>
+        </ul>
+  </div>
+      <div id="J">
+    <div class="brandtitle"> J </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="60"><img src="img/b60.jpg">江淮</li>
+          <li class="onebrand" data-index="61"><img src="img/b61.jpg">Jeep</li>
+          <li class="onebrand" data-index="62"><img src="img/b62.jpg">吉利全球鹰</li>
+          <li class="onebrand" data-index="63"><img src="img/b63.jpg">吉利帝豪</li>
+          <li class="onebrand" data-index="64"><img src="img/b64.jpg">捷豹</li>
+          <li class="onebrand" data-index="65"><img src="img/b65.jpg">吉利英伦</li>
+          <li class="onebrand" data-index="66"><img src="img/b66.jpg">江铃</li>
+          <li class="onebrand" data-index="67"><img src="img/b67.jpg">金杯</li>
+          <li class="onebrand" data-index="68"><img src="img/b68.jpg">江南</li>
+          <li class="onebrand" data-index="69"><img src="img/b69.jpg">金龙联合</li>
+          <li class="onebrand" data-index="70"><img src="img/b70.jpg">九龙</li>
+          <li class="onebrand" data-index="71"><img src="img/b71.jpg">金旅客车</li>
+          <li class="onebrand" data-index="72"><img src="img/b72.jpg">俊风</li>
+          <li class="onebrand" data-index="143"><img src="img/b143.jpg">吉利</li>
+        </ul>
+  </div>
+      <div id="K">
+    <div class="brandtitle"> K </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="73"><img src="img/b73.jpg">凯迪拉克</li>
+          <li class="onebrand" data-index="74"><img src="img/b74.jpg">克莱斯勒</li>
+          <li class="onebrand" data-index="75"><img src="img/b75.jpg">开瑞</li>
+          <li class="onebrand" data-index="76"><img src="img/b76.jpg">科尼塞克</li>
+          <li class="onebrand" data-index="77"><img src="img/b77.jpg">卡尔森</li>
+          <li class="onebrand" data-index="157"><img src="img/b157.jpg">凯翼</li>
+          <li class="onebrand" data-index="158"><img src="img/b158.jpg">卡威</li>
+        </ul>
+  </div>
+      <div id="L">
+    <div class="brandtitle"> L </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="78"><img src="img/b78.jpg">铃木</li>
+          <li class="onebrand" data-index="79"><img src="img/b79.jpg">路虎</li>
+          <li class="onebrand" data-index="80"><img src="img/b80.jpg">雷克萨斯</li>
+          <li class="onebrand" data-index="81"><img src="img/b81.jpg">力帆</li>
+          <li class="onebrand" data-index="82"><img src="img/b82.jpg">兰博基尼</li>
+          <li class="onebrand" data-index="83"><img src="img/b83.jpg">陆风</li>
+          <li class="onebrand" data-index="84"><img src="img/b84.jpg">雷诺</li>
+          <li class="onebrand" data-index="85"><img src="img/b85.jpg">猎豹汽车</li>
+          <li class="onebrand" data-index="86"><img src="img/b86.jpg">劳斯莱斯</li>
+          <li class="onebrand" data-index="87"><img src="img/b87.jpg">林肯</li>
+          <li class="onebrand" data-index="88"><img src="img/b88.jpg">莲花</li>
+          <li class="onebrand" data-index="89"><img src="img/b89.jpg">理念</li>
+          <li class="onebrand" data-index="90"><img src="img/b90.jpg">路特斯</li>
+          <li class="onebrand" data-index="91"><img src="img/b91.jpg">蓝海房车</li>
+          <li class="onebrand" data-index="153"><img src="img/b153.jpg">罗孚</li>
+        </ul>
+  </div>
+      <div id="M">
+    <div class="brandtitle"> M </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="92"><img src="img/b92.jpg">马自达</li>
+          <li class="onebrand" data-index="93"><img src="img/b93.jpg">MG</li>
+          <li class="onebrand" data-index="94"><img src="img/b94.jpg">MINI</li>
+          <li class="onebrand" data-index="95"><img src="img/b95.jpg">迈巴赫</li>
+          <li class="onebrand" data-index="96"><img src="img/b96.jpg">玛莎拉蒂</li>
+          <li class="onebrand" data-index="97"><img src="img/b97.jpg">迈凯伦</li>
+          <li class="onebrand" data-index="98"><img src="img/b98.jpg">摩根</li>
+          <li class="onebrand" data-index="99"><img src="img/b99.jpg">美亚</li>
+        </ul>
+  </div>
+      <div id="N">
+    <div class="brandtitle"> N </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="100"><img src="img/b100.jpg">纳智捷</li>
+        </ul>
+  </div>
+      <div id="O">
+    <div class="brandtitle"> O </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="102"><img src="img/b102.jpg">欧宝</li>
+          <li class="onebrand" data-index="103"><img src="img/b103.jpg">欧朗</li>
+        </ul>
+  </div>
+      <div id="Others">
+    <div class="brandtitle"> Others </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="101"><img src="img/b101.jpg">讴歌</li>
+        </ul>
+  </div>
+      <div id="Q">
+    <div class="brandtitle"> Q </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="104"><img src="img/b104.jpg">起亚</li>
+          <li class="onebrand" data-index="105"><img src="img/b105.jpg">奇瑞</li>
+          <li class="onebrand" data-index="106"><img src="img/b106.jpg">启辰</li>
+          <li class="onebrand" data-index="107"><img src="img/b107.jpg">庆铃</li>
+        </ul>
+  </div>
+      <div id="R">
+    <div class="brandtitle"> R </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="108"><img src="img/b108.jpg">日产</li>
+          <li class="onebrand" data-index="109"><img src="img/b109.jpg">荣威</li>
+          <li class="onebrand" data-index="110"><img src="img/b110.jpg">瑞麒</li>
+        </ul>
+  </div>
+      <div id="S">
+    <div class="brandtitle"> S </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="111"><img src="img/b111.jpg">三菱</li>
+          <li class="onebrand" data-index="112"><img src="img/b112.jpg">斯柯达</li>
+          <li class="onebrand" data-index="113"><img src="img/b113.jpg">斯巴鲁</li>
+          <li class="onebrand" data-index="114"><img src="img/b114.jpg">双龙</li>
+          <li class="onebrand" data-index="116"><img src="img/b116.jpg">Smart</li>
+          <li class="onebrand" data-index="117"><img src="img/b117.jpg">双环</li>
+          <li class="onebrand" data-index="118"><img src="img/b118.jpg">世爵</li>
+          <li class="onebrand" data-index="149"><img src="img/b149.jpg">萨博</li>
+          <li class="onebrand" data-index="169"><img src="img/b169.jpg">思铭</li>
+        </ul>
+  </div>
+      <div id="T">
+    <div class="brandtitle"> T </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="119"><img src="img/b119.jpg">泰赫雅特</li>
+          <li class="onebrand" data-index="120"><img src="img/b120.jpg">TESLA</li>
+          <li class="onebrand" data-index="150"><img src="img/b150.jpg">天马</li>
+        </ul>
+  </div>
+      <div id="W">
+    <div class="brandtitle"> W </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="121"><img src="img/b121.jpg">五菱</li>
+          <li class="onebrand" data-index="122"><img src="img/b122.jpg">沃尔沃</li>
+          <li class="onebrand" data-index="123"><img src="img/b123.jpg">威麟</li>
+          <li class="onebrand" data-index="124"><img src="img/b124.jpg">威兹曼</li>
+          <li class="onebrand" data-index="163"><img src="img/b163.jpg">五十铃</li>
+        </ul>
+  </div>
+      <div id="X">
+    <div class="brandtitle"> X </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="125"><img src="img/b125.jpg">现代</li>
+          <li class="onebrand" data-index="126"><img src="img/b126.jpg">雪佛兰</li>
+          <li class="onebrand" data-index="127"><img src="img/b127.jpg">雪铁龙</li>
+          <li class="onebrand" data-index="128"><img src="img/b128.jpg">西雅特</li>
+          <li class="onebrand" data-index="129"><img src="img/b129.jpg">星客特</li>
+          <li class="onebrand" data-index="130"><img src="img/b130.jpg">新凯</li>
+          <li class="onebrand" data-index="148"><img src="img/b148.jpg">新雅途</li>
+          <li class="onebrand" data-index="151"><img src="img/b151.jpg">新大地</li>
+          <li class="onebrand" data-index="155"><img src="img/b155.jpg">夏利</li>
+        </ul>
+  </div>
+      <div id="Y">
+    <div class="brandtitle"> Y </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="131"><img src="img/b131.jpg">一汽</li>
+          <li class="onebrand" data-index="132"><img src="img/b132.jpg">英菲尼迪</li>
+          <li class="onebrand" data-index="133"><img src="img/b133.jpg">野马汽车</li>
+          <li class="onebrand" data-index="134"><img src="img/b134.jpg">永源</li>
+          <li class="onebrand" data-index="135"><img src="img/b135.jpg">依维柯</li>
+          <li class="onebrand" data-index="136"><img src="img/b136.jpg">扬州亚星客车</li>
+          <li class="onebrand" data-index="159"><img src="img/b159.jpg">英致</li>
+        </ul>
+  </div>
+      <div id="Z">
+    <div class="brandtitle"> Z </div>
+    <ul class="brandlist">
+          <li class="onebrand" data-index="137"><img src="img/b137.jpg">中华</li>
+          <li class="onebrand" data-index="138"><img src="img/b138.jpg">众泰</li>
+          <li class="onebrand" data-index="139"><img src="img/b139.jpg">中兴</li>
+          <li class="onebrand" data-index="140"><img src="img/b140.jpg">中欧</li>
+          <li class="onebrand" data-index="141"><img src="img/b141.jpg">中通客车</li>
+          <li class="onebrand" data-index="152"><img src="img/b152.jpg">中客华北</li>
+          <li class="onebrand" data-index="154"><img src="img/b154.jpg">中顺</li>
+          <li class="onebrand" data-index="175"><img src="">众泰</li>
+        </ul>
+  </div>
+    </div>
+<div id="brand-data" style="display:none;"> 
+      <!--内容-->
+      <header class="mo-header">
+    <div class="mo-header-left"> <a href="javascript:;" id="reback"> <i class="iconfont">&#xe647;</i> </a> </div>
+    <div class="mo-header-title">选择车系</div>
+  </header>
+      <div id="subbrand-data"> </div>
+    </div>
+<a href="javascript:;" id="returntop"></a> 
+<script type="text/javascript" src="script/jquery.lazyload.js"></script> 
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+		effect : "fadeIn"
+     });
+	 $('#returntop').click(function(){$('html,body').animate({scrollTop: '0px'}, 1000);return false;});
+  });
+</script>
+</body>
+</html>
